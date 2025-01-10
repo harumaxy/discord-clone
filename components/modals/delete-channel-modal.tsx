@@ -14,7 +14,7 @@ import * as React from "react";
 
 import { useModal } from "@/hooks/use-modal-store";
 import axios from "axios";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const DeleteChannelModal = () => {
   const router = useRouter();

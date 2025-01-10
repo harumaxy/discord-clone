@@ -60,10 +60,11 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { memberId: string } },
+  options: { params: Promise<{ memberId: string }> },
 ) {
   try {
     const profile = await currentProfile();
+    const params = await options.params;
     const { searchParams } = new URL(req.url);
     const { role } = await req.json();
     const serverId = searchParams.get("serverId");

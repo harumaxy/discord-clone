@@ -13,14 +13,14 @@ interface MemberIdPageProps {
     serverId: string;
     memberId: string;
   }>;
-  searchParams: {
+  searchParams: Promise<{
     video?: boolean;
-  };
+  }>;
 }
 
 const MemberIdPage = async (props: MemberIdPageProps) => {
   const params = await props.params;
-  const searchParams = props.searchParams;
+  const searchParams = await props.searchParams;
   const profile = await currentProfile();
 
   if (!profile) {

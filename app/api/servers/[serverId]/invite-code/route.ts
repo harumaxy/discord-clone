@@ -4,11 +4,12 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 interface Options {
-  params: {
+  params: Promise<{
     serverId: string;
-  };
+  }>;
 }
-export async function PATCH(req: Request, { params }: Options) {
+export async function PATCH(req: Request, options: Options) {
+  const params = await options.params;
   try {
     const profile = await currentProfile();
     if (!profile) {
