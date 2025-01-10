@@ -3,14 +3,15 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 interface Options {
-  params: {
+  params: Promise<{
     serverId: string;
-  };
+  }>;
 }
 
-export async function DELETE(req: Request, { params }: Options) {
+export async function DELETE(req: Request, options: Options) {
   try {
     const profile = await currentProfile();
+    const params = await options.params;
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -30,9 +31,10 @@ export async function DELETE(req: Request, { params }: Options) {
   }
 }
 
-export async function PATCH(req: Request, { params }: Options) {
+export async function PATCH(req: Request, options: Options) {
   try {
     const profile = await currentProfile();
+    const params = await options.params;
     const { name, imageUrl } = await req.json();
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
