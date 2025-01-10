@@ -29,7 +29,7 @@ export const SocketProvider = ({
   React.useEffect(() => {
     // biome-ignore lint/suspicious/noExplicitAny: any
     const socketInstance: Socket = new (ClientIO as any)(
-      process.env.NEXT_PUBLIC_SITE_URL,
+      process.env.NEXT_PUBLIC_SITE_URL, // 環境変数が undef の場合、ローカルホストに接続する
       {
         path: "/api/socket/io",
         addTrailingSlash: false,
