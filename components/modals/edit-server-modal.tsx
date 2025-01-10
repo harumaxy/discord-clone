@@ -41,7 +41,7 @@ const formSchema = z.object({
       message: "Server image is invalid",
     }),
     type: z.string(),
-  })
+  }),
 });
 
 const EditServerModal = () => {
@@ -58,14 +58,14 @@ const EditServerModal = () => {
       image: {
         url: "",
         type: "",
-      }
+      },
     },
   });
 
   React.useEffect(() => {
     if (server) {
       form.setValue("name", server.name);
-      form.setValue("image.url",  server.imageUrl);
+      form.setValue("image.url", server.imageUrl);
       form.setValue("image.type", "image");
     }
   }, [server, form]);

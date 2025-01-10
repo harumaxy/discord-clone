@@ -42,7 +42,7 @@ const MessageFileModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      file: {url: "", type: ""},
+      file: { url: "", type: "" },
     },
   });
 
@@ -66,8 +66,6 @@ const MessageFileModal = () => {
       console.error(error);
     }
   };
-
-
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
