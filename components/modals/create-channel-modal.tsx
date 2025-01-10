@@ -1,7 +1,6 @@
 "use client";
 import qs from "query-string";
 import axios from "axios";
-
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -48,7 +47,8 @@ const formSchema = z.object({
 });
 
 const CreateChannelModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
+  const { channelType } = data;
   const router = useRouter();
 
   const isModalOpen = isOpen && type === "createChannel";
@@ -57,11 +57,19 @@ const CreateChannelModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: ChannelType.TEXT,
+      type: channelType || ChannelType.TEXT,
     },
   });
   const isLoading = form.formState.isSubmitting;
   const params = useParams();
+
+  React.useEffect(() => {
+    if (channelType) {
+      form.setValue("type", channelType);
+    } else {
+      form.setValue("type", ChannelType.TEXT);
+    }
+  }, [channelType, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
