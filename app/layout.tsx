@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { cn } from "@/lib/utils";
 
 const font = Open_Sans({
 	subsets: ["latin"],
@@ -22,7 +23,12 @@ export default function RootLayout({
 		<ClerkProvider afterSignOutUrl="/">
 			<html lang="en" suppressHydrationWarning>
 				{/* html タグに、 className="dark" style={{color-scheme:"dark"}} 属性がクライアント側でつく。SSRとCSRでレンダリング結果が異なるというエラーが出るので suppress */}
-				<body className={`${font.className} antialiased`}>
+				<body
+					className={cn(
+						`${font.className} antialiased`,
+						"bg-white dark:bg-[#313338]",
+					)}
+				>
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="dark"
