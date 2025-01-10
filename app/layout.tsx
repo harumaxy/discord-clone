@@ -8,6 +8,7 @@ import ModalProvider from "@/components/providers/modal-provider";
 // globals.css のインポート順が早いと、 hidden md:flex のメディアクエリが効かない (画面サイズが小さいときにサイドバーを非表示にするなど)
 // https://github.com/tailwindlabs/tailwindcss/discussions/12596#discussioncomment-9192043
 import "./globals.css";
+import InviteModal from "@/components/modals/invite-modal";
 
 const font = Open_Sans({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
             storageKey="discord-theme"
           >
             <ModalProvider />
+            <InviteModal />
             {children}
           </ThemeProvider>
         </body>
