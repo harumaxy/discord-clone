@@ -5,14 +5,15 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 interface ChannelIdPageProps {
-  params: {
+  params: Promise<{
     serverId: string;
     channelId: string;
-  };
+  }>;
 }
 
-const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
+const ChannelIdPage = async (props: ChannelIdPageProps) => {
   const profile = await currentProfile();
+  const params = await props.params;
 
   if (!profile) {
     return (await auth()).redirectToSignIn();
