@@ -8,11 +8,13 @@
 		"start": "next start",
 		"lint": "next lint",
 		"add": "npx shadcn@latest add",
+		"gen": "npx prisma generate",
 		"init:shadcn": "npx shadcn@latest init",
 		"init:prisma": "npx prisma init"
 	},
 	"dependencies": {
 		"@clerk/nextjs": "^6.9.10",
+		"@prisma/client": "^6.2.1",
 		"@radix-ui/react-dropdown-menu": "^2.1.4",
 		"@radix-ui/react-slot": "^1.1.1",
 		"class-variance-authority": "^0.7.1",
