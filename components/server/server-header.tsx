@@ -31,12 +31,6 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
 
-  // remove me
-  React.useEffect(() => {
-    onOpen("deleteServer", { server });
-  }, [server, onOpen]);
-  // remove me
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none" asChild>
