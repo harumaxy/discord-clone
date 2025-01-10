@@ -4,14 +4,15 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 interface ServerIdPageProps {
-  params: {
+  params: Promise<{
     serverId: string;
-  };
+  }>;
 }
 
 // Channel ではなく serverId にアクセスした時、サーバーにある最初のチャンネルが general なら general チャンネルにリダイレクト (general がなければ何も表示しない)
-const ServerIdPage = async ({ params }: ServerIdPageProps) => {
+const ServerIdPage = async (props: ServerIdPageProps) => {
   const profile = await currentProfile();
+  const params = await props.params;
 
   if (!profile) {
     return (await auth()).redirectToSignIn();
