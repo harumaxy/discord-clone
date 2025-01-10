@@ -7,6 +7,7 @@ import EditServerModal from "@/components/modals/edit-server-modal";
 import MembersModal from "@/components/modals/members-modal";
 import CreateChannelModal from "../modals/create-channel-modal";
 import LeaveServer from "../modals/leave-server-modal";
+import DeleteServerModal from "../modals/delete-server-modal";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = React.useState(false);
@@ -26,6 +27,7 @@ const ModalProvider = () => {
       <MembersModal />
       <CreateChannelModal />
       <LeaveServer />
+      <DeleteServerModal />
     </>
   );
 };

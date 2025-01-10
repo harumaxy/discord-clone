@@ -2,12 +2,35 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-interface PatchOptions {
+interface Options {
   params: {
     serverId: string;
   };
 }
-export async function PATCH(req: Request, { params }: PatchOptions) {
+
+export async function DELETE(req: Request, { params }: Options) {
+  try {
+    const profile = await currentProfile();
+
+    if (!profile) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const server = await db.server.delete({
+      where: {
+        id: params.serverId,
+        profileId: profile.id,
+      },
+    });
+
+    return NextResponse.json(server);
+  } catch (error) {
+    console.error("[SERVER_ID_DELETE]", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
+
+export async function PATCH(req: Request, { params }: Options) {
   try {
     const profile = await currentProfile();
     const { name, imageUrl } = await req.json();
