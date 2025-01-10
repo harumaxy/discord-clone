@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
-import {
-	ClerkProvider,
-	SignedIn,
-	SignedOut,
-	SignInButton,
-	UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const font = Open_Sans({
 	subsets: ["latin"],
@@ -24,9 +19,18 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ClerkProvider>
+		<ClerkProvider afterSignOutUrl="/">
 			<html lang="en">
-				<body className={`${font.className} antialiased`}>{children}</body>
+				<body className={`${font.className} antialiased`}>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="dark"
+						enableSystem={false}
+						storageKey="discord-theme"
+					>
+						{children}
+					</ThemeProvider>
+				</body>
 			</html>
 		</ClerkProvider>
 	);
