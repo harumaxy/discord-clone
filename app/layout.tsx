@@ -20,12 +20,14 @@ export default function RootLayout({
 }>) {
 	return (
 		<ClerkProvider afterSignOutUrl="/">
-			<html lang="en">
+			<html lang="en" suppressHydrationWarning>
+				{/* html タグに、 className="dark" style={{color-scheme:"dark"}} 属性がクライアント側でつく。SSRとCSRでレンダリング結果が異なるというエラーが出るので suppress */}
 				<body className={`${font.className} antialiased`}>
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="dark"
-						enableSystem={false}
+						// forcedTheme="light"
+						enableSystem={false} // システムの状態が dark/light のどちらでも system を使うときはライトにしたい
 						storageKey="discord-theme"
 					>
 						{children}
