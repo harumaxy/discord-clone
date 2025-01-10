@@ -2,7 +2,8 @@
 
 Powered by following libraries/services 
 
-- https://nextjs.org/
-- https://uploadthing.com/
-- https://dashboard.clerk.com/
-- https://livekit.io/
+- https://nextjs.org
+- https://fly.io
+- https://uploadthing.com
+- https://dashboard.clerk.com
+- https://livekit.io
