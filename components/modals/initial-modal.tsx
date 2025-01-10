@@ -38,6 +38,12 @@ const formSchema = z.object({
 });
 
 const InitialModal = () => {
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -55,6 +61,10 @@ const InitialModal = () => {
       console.error(error);
     }
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Dialog open>
