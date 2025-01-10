@@ -1,4 +1,8 @@
-# deps
+# Discord clone
 
-https://uploadthing.com/
-https://dashboard.clerk.com/
+Powered by following libraries/services 
+
+- https://nextjs.org/
+- https://uploadthing.com/
+- https://dashboard.clerk.com/
+- https://livekit.io/
