@@ -34,7 +34,7 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
   // remove me
   React.useEffect(() => {
     onOpen("members", { server });
-  }, [server]);
+  }, [server, onOpen]);
   // remove me
 
   return (

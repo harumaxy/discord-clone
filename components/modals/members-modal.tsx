@@ -38,7 +38,7 @@ import {
   ShieldCheck,
   ShieldQuestion,
 } from "lucide-react";
-import { MemberRole } from "@prisma/client";
+import type { MemberRole } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 const roleIconMap = {
