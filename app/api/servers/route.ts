@@ -16,7 +16,7 @@ export async function POST(req: Request) {
         name,
         imageUrl,
         inviteCode: uuidv4(),
-        channels: { create: [{ name: "general", profileId: profile.id }] },
+        channels: { create: [{ name: "general", profileId: profile.id }] }, // どの Server にも、 Default Channel として general を作成する
         members: {
           create: [{ profileId: profile.id, role: MemberRole.ADMIN }],
         },

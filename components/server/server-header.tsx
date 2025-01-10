@@ -33,7 +33,7 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
 
   // remove me
   React.useEffect(() => {
-    onOpen("members", { server });
+    onOpen("createChannel", { server });
   }, [server, onOpen]);
   // remove me
 
