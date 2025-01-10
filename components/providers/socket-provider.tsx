@@ -34,7 +34,7 @@ export const SocketProvider = ({
   const [isConnected, setIsConnected] = React.useState(false);
 
   React.useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny:
     const socketInstance: Socket = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL, // 環境変数が undef の場合、ローカルホストに接続する
       {
