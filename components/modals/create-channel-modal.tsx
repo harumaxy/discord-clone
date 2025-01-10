@@ -9,9 +9,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  // DialogFooter,
   DialogHeader,
-  DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
 import {
@@ -25,7 +23,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import * as React from "react";
-import FileUpload from "@/components/file-upload";
 import { useParams, useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
