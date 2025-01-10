@@ -2,22 +2,22 @@ import { db } from "./db";
 
 export async function getOrCreateConversation(
   memberOneId: string,
-  memberTowId: string,
+  memberTwoId: string,
 ) {
   let conversation =
-    (await findConversation(memberOneId, memberTowId)) ||
-    (await findConversation(memberTowId, memberOneId)); // 自分 または 相手 が始めた会話を探す
+    (await findConversation(memberOneId, memberTwoId)) ||
+    (await findConversation(memberTwoId, memberOneId)); // 自分 または 相手 が始めた会話を探す
   if (!conversation) {
-    conversation = await createNewConverSation(memberOneId, memberTowId); // なかったら自分が新しい会話を始める
+    conversation = await createNewConverSation(memberOneId, memberTwoId); // なかったら自分が新しい会話を始める
   }
   return conversation;
 }
 
-async function findConversation(memberOneId: string, memberTowId: string) {
+async function findConversation(memberOneId: string, memberTwoId: string) {
   try {
     return await db.conversation.findFirst({
       where: {
-        AND: [{ memberOneId, memberTowId }],
+        AND: [{ memberOneId, memberTwoId }],
       },
       include: {
         memberOne: {
@@ -25,7 +25,7 @@ async function findConversation(memberOneId: string, memberTowId: string) {
             profile: true,
           },
         },
-        memberTow: {
+        memberTwo: {
           include: {
             profile: true,
           },
@@ -38,12 +38,12 @@ async function findConversation(memberOneId: string, memberTowId: string) {
   }
 }
 
-async function createNewConverSation(memberOneId: string, memberTowId: string) {
+async function createNewConverSation(memberOneId: string, memberTwoId: string) {
   try {
     return await db.conversation.create({
       data: {
         memberOneId,
-        memberTowId,
+        memberTwoId,
       },
       include: {
         memberOne: {
@@ -51,7 +51,7 @@ async function createNewConverSation(memberOneId: string, memberTowId: string) {
             profile: true,
           },
         },
-        memberTow: {
+        memberTwo: {
           include: {
             profile: true,
           },

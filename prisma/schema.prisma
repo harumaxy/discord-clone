@@ -70,7 +70,7 @@ model Member {
   directMessages DirectMessage[]
 
   conversationsInitiated Conversation[] @relation("MemberOne")
-  conversationsReceived  Conversation[] @relation("MemberTow")
+  conversationsReceived  Conversation[] @relation("MemberTwo")
 
   @@index([profileId])
   @@index([serverId])
@@ -133,13 +133,13 @@ model Conversation {
   memberOneId String
   memberOne   Member @relation("MemberOne", fields: [memberOneId], references: [id], onDelete: Cascade)
 
-  memberTowId String
-  memberTow   Member @relation("MemberTow", fields: [memberTowId], references: [id], onDelete: Cascade)
+  memberTwoId String
+  memberTwo   Member @relation("MemberTwo", fields: [memberTwoId], references: [id], onDelete: Cascade)
 
   directMessages DirectMessage[]
 
-  @@unique([memberOneId, memberTowId])
-  @@index([memberTowId])
+  @@unique([memberOneId, memberTwoId])
+  @@index([memberTwoId])
 }
 
 model DirectMessage {
