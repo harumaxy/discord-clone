@@ -1,14 +1,13 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)'])
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', "/api/uploadthing"])
 
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect() // ログインしてないのに Private route にいる場合、NEXT_PUBLIC_CLERK_SIGN_IN_URL ページにリダイレクトする
   }
 })
-
 
 export const config = {
   matcher: [
