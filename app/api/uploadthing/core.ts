@@ -18,11 +18,15 @@ export const ourFileRouter = {
 		},
 	})
 		.middleware(() => handleAuth())
-		.onUploadComplete(() => {}),
+		.onUploadComplete(({ metadata }) => {
+			return { uploadedBy: metadata.userId };
+		}),
 	// Discord メッセージの添付ファイルのアップロードエンドポイント
 	messageFile: f(["image", "pdf"])
 		.middleware(() => handleAuth())
-		.onUploadComplete(() => {}),
+		.onUploadComplete(({ metadata }) => {
+			return { uploadedBy: metadata.userId };
+		}),
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;
