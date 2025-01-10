@@ -9,6 +9,7 @@
 		"lint": "next lint",
 		"add": "npx shadcn@latest add",
 		"gen": "npx prisma generate",
+		"push": "npx prisma db push",
 		"init:shadcn": "npx shadcn@latest init",
 		"init:prisma": "npx prisma init"
 	},
