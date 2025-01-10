@@ -13,6 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ユーザーアカウント的なもの。 Clerk でログインし、 clerk.user.id でクエリし lib/initialProfile.ts で取得 or なかったら作成する
 model Profile {
   id       String @id @default(uuid())
   userId   String @unique
