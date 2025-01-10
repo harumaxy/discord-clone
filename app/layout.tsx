@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-import "./globals.css";
+
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
 import ModalProvider from "@/components/providers/modal-provider";
+// globals.css のインポート順が早いと、 hidden md:flex のメディアクエリが効かない (画面サイズが小さいときにサイドバーを非表示にするなど)
+// https://github.com/tailwindlabs/tailwindcss/discussions/12596#discussioncomment-9192043
+import "./globals.css";
 
 const font = Open_Sans({
   subsets: ["latin"],
