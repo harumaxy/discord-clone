@@ -6,7 +6,10 @@ import { MemberRole } from "@prisma/client";
 
 export async function POST(req: Request) {
   try {
-    const { name, imageUrl } = await req.json();
+    const {
+      name,
+      image: { url },
+    } = await req.json();
     const profile = await currentProfile();
     if (!profile) return new NextResponse("Unauthorized", { status: 401 });
 
@@ -14,7 +17,7 @@ export async function POST(req: Request) {
       data: {
         profileId: profile.id,
         name,
-        imageUrl,
+        imageUrl: url,
         inviteCode: uuidv4(),
         channels: { create: [{ name: "general", profileId: profile.id }] }, // どの Server にも、 Default Channel として general を作成する
         members: {

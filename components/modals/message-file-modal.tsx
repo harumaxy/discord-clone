@@ -24,8 +24,11 @@ import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
 const formSchema = z.object({
-  fileUrl: z.string().url({
-    message: "Attachment is invalid",
+  file: z.object({
+    url: z.string().url({
+      message: "Attachment is invalid",
+    }),
+    type: z.string(),
   }),
 });
 
@@ -39,7 +42,7 @@ const MessageFileModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fileUrl: "",
+      file: {url: "", type: ""},
     },
   });
 
@@ -55,7 +58,7 @@ const MessageFileModal = () => {
         url: apiUrl ?? "",
         query,
       });
-      await axios.post(url, { ...values, content: values.fileUrl });
+      await axios.post(url, { ...values, content: values.file.url });
 
       router.refresh();
       handleClose();
@@ -63,6 +66,8 @@ const MessageFileModal = () => {
       console.error(error);
     }
   };
+
+
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
@@ -82,7 +87,7 @@ const MessageFileModal = () => {
               <div className="flex items-center justify-center text-center">
                 <FormField
                   control={form.control}
-                  name="fileUrl"
+                  name="file"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>

@@ -13,7 +13,7 @@ export default async function handler(
 
   try {
     const profile = await currentProfilePages(req);
-    const { content, fileUrl } = req.body;
+    const { content, file } = req.body;
     const { serverId, channelId } = req.query;
 
     if (!profile) {
@@ -67,7 +67,8 @@ export default async function handler(
     const message = await db.message.create({
       data: {
         content,
-        fileUrl: (fileUrl as string | undefined) || "", // Pages API の res.body のせいで fileUrl が any になってるが、文字列を渡さないとPrismaエラーになる. null | undefined は NG
+        fileUrl: file.url ?? "", // Pages API の res.body のせいで fileUrl が any になってるが、文字列を渡さないとPrismaエラーになる. null | undefined は NG
+        fileType: file.type ?? "",
         channelId: channelId as string,
         memberId: member.id,
       },

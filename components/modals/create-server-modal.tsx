@@ -33,8 +33,11 @@ const formSchema = z.object({
   name: z.string().min(1, {
     message: "Server name is required",
   }),
-  imageUrl: z.string().url({
-    message: "Server image is invalid",
+  image: z.object({
+    url: z.string().url({
+      message: "Invalid image url",
+    }),
+    type: z.string(),
   }),
 });
 
@@ -48,7 +51,10 @@ const CreateServerModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      imageUrl: "",
+      image: {
+        url: "",
+        type: "image",
+      },
     },
   });
   const isLoading = form.formState.isSubmitting;
@@ -87,7 +93,7 @@ const CreateServerModal = () => {
               <div className="flex items-center justify-center text-center">
                 <FormField
                   control={form.control}
-                  name="imageUrl"
+                  name="image"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>

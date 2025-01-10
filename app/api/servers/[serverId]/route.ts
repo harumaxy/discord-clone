@@ -35,7 +35,10 @@ export async function PATCH(req: Request, options: Options) {
   try {
     const profile = await currentProfile();
     const params = await options.params;
-    const { name, imageUrl } = await req.json();
+    const {
+      name,
+      image: { url },
+    } = await req.json();
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
@@ -47,7 +50,7 @@ export async function PATCH(req: Request, options: Options) {
       },
       data: {
         name,
-        imageUrl,
+        imageUrl: url,
       },
     });
 
