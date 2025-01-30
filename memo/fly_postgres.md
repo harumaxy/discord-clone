@@ -20,15 +20,6 @@
 fly postgres attach discord-clone-wispy-snow-4126-db -a discord-clone-wispy-snow-4126
 ```
 
-## .env ファイル
-
-Next.js だと環境変数より env ファイルを優先してそう
-開発などでローカルからデプロイする場合は、別の場所に退避しておくなどする
-
-## Fly Supabase
-
-`fly ext supabase create` をやると何故か失敗する
-バグかも
 
 ## 注意点
 
